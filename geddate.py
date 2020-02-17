@@ -1,5 +1,5 @@
 """
-SSW555DSYZ-geddate by Yuning Sun
+ssw555tmDSYZ2020spring-geddate by Yuning Sun
 17:47 2020/2/10
 Module documentation: Datetime operations used in gedparser.py
 """

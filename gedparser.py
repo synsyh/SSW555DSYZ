@@ -1,5 +1,5 @@
 """
-SSW555DSYZ-gedparser by Yuning Sun
+ssw555tmDSYZ2020spring-gedparser by Yuning Sun
 18:04 2020/2/7
 Module documentation: Parser to parser ged file and save information
 """

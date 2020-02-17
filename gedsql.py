@@ -1,5 +1,5 @@
 """
-SSW555DSYZ-MySQL_test by Yuning Sun
+ssw555tmDSYZ2020spring-MySQL_test by Yuning Sun
 16:34 2020/2/7
 Module documentation: 
 """
