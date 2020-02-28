@@ -8,3 +8,6 @@ class LegalError(GEDError):
         self.args = arg
 
 
+class PossibleError(GEDError):
+    def __init__(self, arg):
+        self.args = arg
