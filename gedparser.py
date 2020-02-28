@@ -22,6 +22,13 @@ def get_name_by_id(name_id, inds):
     return 'not found'
 
 
+def get_ind_by_id(id, inds):
+    for ind in inds:
+        if ind['id'] == id:
+            return ind
+
+
+# TODO: record line number
 class GEDParser:
     def __init__(self, file_name):
         # create initial variables
@@ -59,18 +66,7 @@ class GEDParser:
                             elif words[1] == 'FAMS':
                                 ind['fams'].add(words[2])
                             line = next(f)
-                        # complete indi's data
-                        if 'deat' in ind.keys():
-                            ind['age'] = get_age(ind['birt'], ind['deat'])
-                            ind['alive'] = 'False'
-                        else:
-                            ind['deat'] = 'NA'
-                            ind['alive'] = 'True'
-                            ind['age'] = get_age(ind['birt'])
-                        if 'famc' not in ind.keys() or len(ind['famc']) == 0:
-                            ind['famc'] = 'NA'
-                        if 'fams' not in ind.keys() or len(ind['fams']) == 0:
-                            ind['fams'] = 'NA'
+
                         self.inds.append(ind)
                         ind = dict()
                         ind['famc'] = set()
@@ -96,8 +92,8 @@ class GEDParser:
                             fam['divorced'] = fam['div']
                         else:
                             fam['divorced'] = 'False'
-                        if len(fam['chil']) == 0:
-                            fam['chil'] = 'NA'
+                        # if len(fam['chil']) == 0:
+                        #     fam['chil'] = 'NA'
                         # TODO: if in ged file, FAM parts are before INDI parts, this gonna be wrong
                         if 'husb' in fam.keys():
                             fam['husb_name'] = get_name_by_id(fam['husb'], self.inds)
@@ -115,14 +111,41 @@ class GEDParser:
         # sort the list according to id number
         self.inds.sort(key=lambda ind: ind['id'])
         self.fams.sort(key=lambda fam: fam['id'])
+        for fam in self.fams:
+            husb = get_ind_by_id(fam['husb'], self.inds)
+            if husb:
+                if 'chil' not in husb.keys():
+                    husb['chil'] = set()
+                husb['chil'] = husb['chil'].union(fam['chil'])
+            wife = get_ind_by_id(fam['wife'], self.inds)
+            if wife:
+                if 'chil' not in wife.keys():
+                    wife['chil'] = set()
+                wife['chil'] = wife['chil'].union(fam['chil'])
+
+        print()
 
     def print_indi(self):
         # create pretty table
         pt = prettytable.PrettyTable(['ID', 'Name', 'Gender', 'Birthday', 'Age', 'Alive', 'Death', 'Child', 'Spouse'])
         for ind in self.inds:
+            # complete indi's data
+            if 'deat' in ind.keys():
+                ind['age'] = get_age(ind['birt'], ind['deat'])
+                ind['alive'] = 'False'
+            else:
+                ind['deat'] = 'NA'
+                ind['alive'] = 'True'
+                ind['age'] = get_age(ind['birt'])
+            if 'famc' not in ind.keys() or len(ind['famc']) == 0:
+                ind['famc'] = 'NA'
+            if 'fams' not in ind.keys() or len(ind['fams']) == 0:
+                ind['fams'] = 'NA'
+            if 'chil' not in ind.keys():
+                ind['chil'] = 'NA'
             pt.add_row(
                 [ind['id'], ind['name'], ind['sex'], ind['birt'], ind['age'], ind['alive'], ind['deat'],
-                 str(ind['famc']),
+                 str(ind['chil']),
                  str(ind['fams'])])
         print(pt)
 
@@ -136,8 +159,17 @@ class GEDParser:
         print(pt)
 
 
+class GEDError(ValueError):
+    def __init__(self, arg):
+        self.args = arg
+
+
 if __name__ == '__main__':
     p = GEDParser('res/ysun.ged')
     p.parser()
     p.print_fams()
     p.print_indi()
+    try:
+        raise GEDError("Bad hostname")
+    except GEDError:
+        print(GEDError)
