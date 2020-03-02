@@ -6,6 +6,7 @@ Module documentation:
 import unittest
 
 from gedparser import GEDParser
+from sprint1.dcai_sprint1 import dates_before_current_date, birth_before_marriage
 from sprint1.sfan_sprint1 import siblings_not_marry, no_marries_to_children
 from sprint1.ysun_sprint1 import include_individual_ages, corresponding_entries
 from sprint1.zkang_sprint1 import marriage_after_14, birth_after_d_p
@@ -15,12 +16,26 @@ class TestSprint1(unittest.TestCase):
     def test_true(self):
         p = GEDParser('./res/ysun.ged')
         p.parser()
+        self.assertEqual(dates_before_current_date(p), None)
+        self.assertEqual(birth_before_marriage(p), None)
         self.assertEqual(birth_after_d_p(p.fams, p.inds), None)
         self.assertEqual(marriage_after_14(p.fams, p.inds), None)
         self.assertEqual(no_marries_to_children(p), None)
         self.assertEqual(siblings_not_marry(p), None)
         self.assertEqual(corresponding_entries(p), None)
         self.assertEqual(include_individual_ages(p), None)
+
+    def test_US01(self):
+        p = GEDParser('res/US01_02.ged')
+        p.parser()
+        self.assertEqual(dates_before_current_date(p),
+                         'ERROR: INDIVIDUAL: US01: Birthday 2069-12-19 00:00:00 is after today')
+
+    def test_US02(self):
+        p = GEDParser('res/US01_02.ged')
+        p.parser()
+        self.assertEqual(birth_before_marriage(p),
+                         "ERROR: FAMILY: US02: Wife's birthday 2069-12-19 00:00:00 is after marriage date 2005-06-06 00:00:00")
 
     def test_US09(self):
         p = GEDParser('res/US09.ged')
