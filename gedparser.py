@@ -43,6 +43,12 @@ def get_ind_by_id(id, inds):
         return None
 
 
+def get_fam_by_id(id, fams):
+    for fam in fams:
+        if fam['id'] == id:
+            return fam
+
+
 # TODO: record line number
 class GEDParser:
     def __init__(self, file_name):
