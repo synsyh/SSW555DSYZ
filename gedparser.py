@@ -7,6 +7,7 @@ Module documentation: Parser to parser ged file and save information
 import prettytable
 
 from geddate import date_transit, get_age
+from gederror import GEDError
 
 
 def get_name_by_id(name_id, inds):
@@ -26,6 +27,8 @@ def get_ind_by_id(id, inds):
     for ind in inds:
         if ind['id'] == id:
             return ind
+    else:
+        return None
 
 
 # TODO: record line number
@@ -136,7 +139,10 @@ class GEDParser:
             else:
                 ind['deat'] = 'NA'
                 ind['alive'] = 'True'
-                ind['age'] = get_age(ind['birt'])
+                try:
+                    ind['age'] = get_age(ind['birt'])
+                except KeyError:
+                    continue
             if 'famc' not in ind.keys() or len(ind['famc']) == 0:
                 ind['famc'] = 'NA'
             if 'fams' not in ind.keys() or len(ind['fams']) == 0:
@@ -147,7 +153,7 @@ class GEDParser:
                 [ind['id'], ind['name'], ind['sex'], ind['birt'], ind['age'], ind['alive'], ind['deat'],
                  str(ind['chil']),
                  str(ind['fams'])])
-        print(pt)
+        return pt
 
     def print_fams(self):
         pt = prettytable.PrettyTable(
@@ -156,19 +162,14 @@ class GEDParser:
             pt.add_row(
                 [fam['id'], fam['marr'], fam['divorced'], fam['husb'], fam['husb_name'], fam['wife'], fam['wife_name'],
                  fam['chil']])
-        print(pt)
-
-
-class GEDError(ValueError):
-    def __init__(self, arg):
-        self.args = arg
+        return pt
 
 
 if __name__ == '__main__':
     p = GEDParser('res/ysun.ged')
     p.parser()
-    p.print_fams()
-    p.print_indi()
+    print(p.print_fams())
+    print(p.print_indi())
     try:
         raise GEDError("Bad hostname")
     except GEDError:
