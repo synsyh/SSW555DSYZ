@@ -8,6 +8,18 @@ import prettytable
 
 from geddate import date_transit, get_age
 
+def left_before_right(left, right):
+    if int(left[0:4]) < int(right[0:4]):
+        return True
+    elif int(left[0:4]) == int(right[0:4]):
+        if int(left[5:7]) < int(right[5:7]):
+            return True
+        elif int(left[5:7]) == int(right[5:7]):
+            if int(left[8:10]) < int(right[8:10]):
+                return True
+
+    return False
+
 
 def get_name_by_id(name_id, inds):
     """
@@ -39,7 +51,7 @@ class GEDParser:
         ind, fam = {}, {}
         ind['famc'], ind['fams'] = set(), set()
         fam['chil'] = set()
-        with open(self.file_name) as f:
+        with open(self.file_name, encoding="utf8") as f:
             line = f.readline()
             while line:
                 words = line.strip().split(' ', maxsplit=2)
@@ -123,8 +135,6 @@ class GEDParser:
                     wife['chil'] = set()
                 wife['chil'] = wife['chil'].union(fam['chil'])
 
-        print()
-
     def print_indi(self):
         # create pretty table
         pt = prettytable.PrettyTable(['ID', 'Name', 'Gender', 'Birthday', 'Age', 'Alive', 'Death', 'Child', 'Spouse'])
@@ -165,7 +175,7 @@ class GEDError(ValueError):
 
 
 if __name__ == '__main__':
-    p = GEDParser('res/ysun.ged')
+    p = GEDParser('res/US09.ged')
     p.parser()
     p.print_fams()
     p.print_indi()
