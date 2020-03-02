@@ -7,7 +7,7 @@ Module documentation: Parser to parser ged file and save information
 import prettytable
 
 from geddate import date_transit, get_age
-from gederror import GEDError
+
 
 def left_before_right(left, right):
     if int(left[0:4]) < int(right[0:4]):

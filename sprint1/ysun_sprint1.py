@@ -3,11 +3,10 @@ ssw555tmDSYZ2020spring-ysun_sprint1 by Yuning Sun
 15:36 2020/2/17
 Module documentation: 
 """
-from gederror import GEDError
 from gedparser import GEDParser
 
 
-def unique_first_name(p):
+def include_individual_ages(p):
     """
     US27: Include person's current age when listing individuals
     @param p:
@@ -19,7 +18,8 @@ def unique_first_name(p):
     for ind in p.inds:
         if 'age' not in ind.keys():
             missed_aged_ind.append(ind['id'])
-    raise GEDError('Individual: ' + ', '.join(missed_aged_ind) + ' have no age information.')
+    if missed_aged_ind:
+        return 'ERROR: INDIVIDUAL: US27: ' + ', '.join(missed_aged_ind) + ' have no age information.'
 
 
 def corresponding_entries(p):
@@ -33,6 +33,7 @@ def corresponding_entries(p):
     """
     ind_in_fam = set()
     ind_in_ind = set()
+    results = []
     for fam in p.fams:
         ind_in_fam.add(fam['wife'])
         ind_in_fam.add(fam['husb'])
@@ -50,13 +51,16 @@ def corresponding_entries(p):
         if ind_id not in ind_in_ind:
             missed_fam_id.append(ind_id)
     if missed_ind_id:
-        raise GEDError('Individual: ' + ','.join(missed_ind_id) + ' cannot find corresponding families.')
+        results.append('ERROR: INDIVIDUAL: US26: ' + ','.join(missed_ind_id) + ' cannot find corresponding families.')
     if missed_fam_id:
-        raise GEDError(
-            'Individual: ' + ','.join(missed_fam_id) + ' cannot find corresponding individual information.')
+        missed_fam_id.sort()
+        results.append(
+            'ERROR: FAMILY: US26: ' + ','.join(missed_fam_id) + ' cannot find corresponding individual information.')
+    if results:
+        return results
 
 
 if __name__ == '__main__':
-    p = GEDParser('res/US27.ged')
+    p = GEDParser('./res/US26.ged')
     p.parser()
-    unique_first_name(p)
+    print(corresponding_entries(p))

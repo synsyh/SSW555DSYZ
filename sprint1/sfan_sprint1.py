@@ -34,7 +34,7 @@ def siblings_not_marry(p):
 
 
 if __name__ == '__main__':
-    p = GEDParser('res/sfan_test_17_18.ged')
+    p = GEDParser('../res/US17_18.ged')
     p.parser()
     print(no_marries_to_children(p))
     print(siblings_not_marry(p))
