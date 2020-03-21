@@ -3,6 +3,8 @@ ssw555tmDSYZ2020spring-gedparser1 by Yuning Sun
 12:02 PM 2/27/20
 Module documentation: 
 """
+from collections import defaultdict
+
 import prettytable
 
 from geddate import date_transit, get_age
@@ -13,6 +15,7 @@ class GEDParser:
     def __init__(self, file_name):
         # create initial variables
         self.file_name = file_name
+        self.geddata = defaultdict(list)
         self.indis, self.fams, self.oths = [], [], []
 
     def parser(self):
@@ -26,26 +29,28 @@ class GEDParser:
             while line:
                 if words[0] == '0':
                     if item:
-                        if item_type == 'INDI':
-                            self.indis.append(item)
-                        elif item_type == 'FAM':
-                            self.fams.append(item)
-                        else:
-                            self.oths.append(item)
+                        # if item_type == 'INDI':
+                        #     self.indis.append(item)
+                        # elif item_type == 'FAM':
+                        #     self.fams.append(item)
+                        # else:
+                        #     self.oths.append(item)
+                        self.geddata[item_type].append(item)
                     item = dict()
                     item_type = words[-1]
                     item[item_type] = {item_type: words[1], 'LINE': line_num}
                 elif words[0] == '1':
-                    # if next line has same tag as last line. For example, double lines for FAMS
+                    # if next line has same tag as last line. For example, double lines for tag "FAMS"
                     if words[1] == item_type1:
-                        if 0 in item[item_type1].keys():
-                            item[item_type1][list(item[item_type1].keys())[-1] + 1] = {item_type1: words[-1],
-                                                                                       'LINE': line_num}
-                        else:
-                            tmp_item = dict()
-                            tmp_item[0] = item[item_type1]
-                            tmp_item[1] = {item_type1: words[-1], 'LINE': line_num}
-                            item[item_type1] = tmp_item
+                        item[item_type1] = [item[item_type1], {item_type1: words[-1], 'LINE': line_num}]
+                        # if 0 in item[item_type1].keys():
+                        #     item[item_type1][list(item[item_type1].keys())[-1] + 1] = {item_type1: words[-1],
+                        #                                                                'LINE': line_num}
+                        # else:
+                        #     tmp_item = dict()
+                        #     tmp_item[0] = item[item_type1]
+                        #     tmp_item[1] = {item_type1: words[-1], 'LINE': line_num}
+                        #     item[item_type1] = tmp_item
                     else:
                         item_type1 = words[1]
                         item[item_type1] = {item_type1: words[-1], 'LINE': line_num}
@@ -143,7 +148,7 @@ def print_inds(inds):
 
 
 if __name__ == '__main__':
-    p = GEDParser('res/ysun.ged')
+    p = GEDParser('res/test.ged')
     p.parser()
     inds, fams = indi_info(p.indis, p.fams)
     print_fams(fams)

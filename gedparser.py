@@ -182,11 +182,7 @@ class GEDParser:
 
 
 if __name__ == '__main__':
-    p = GEDParser('res/US09.ged')
+    p = GEDParser('res/valid.ged')
     p.parser()
     print(p.print_fams())
     print(p.print_indi())
-    try:
-        raise GEDError("Bad hostname")
-    except GEDError:
-        print(GEDError)

@@ -3,6 +3,7 @@ ssw555tmDSYZ2020spring-ysun_sprint1 by Yuning Sun
 15:36 2020/2/17
 Module documentation: 
 """
+from geddata import get_inds_fams
 from gedparser import GEDParser
 
 
@@ -22,7 +23,7 @@ def include_individual_ages(p):
         return 'ERROR: INDIVIDUAL: US27: ' + ', '.join(missed_aged_ind) + ' have no age information.'
 
 
-def corresponding_entries(p):
+def corresponding_entries(inds, fams):
     """
     US26: All family roles (spouse, child) specified in an individual record should have corresponding entries in the
     corresponding family records. Likewise, all individual roles (spouse, child) specified in family records should
@@ -34,12 +35,12 @@ def corresponding_entries(p):
     ind_in_fam = set()
     ind_in_ind = set()
     results = []
-    for fam in p.fams:
+    for fam in fams:
         ind_in_fam.add(fam['wife'])
         ind_in_fam.add(fam['husb'])
-        for child in fam['chil']:
-            ind_in_fam.add(child)
-    for ind in p.inds:
+        for i in range(len(fam['chil'].value)):
+            ind_in_fam.add(fam['chil'].value[i])
+    for ind in inds:
         ind_in_ind.add(ind['id'])
     ind_in_fam.remove('NA')
     missed_ind_id = []
@@ -61,6 +62,5 @@ def corresponding_entries(p):
 
 
 if __name__ == '__main__':
-    p = GEDParser('./res/US26.ged')
-    p.parser()
-    print(corresponding_entries(p))
+    inds, fams = get_inds_fams('../res/US26.ged')
+    corresponding_entries(inds, fams)
