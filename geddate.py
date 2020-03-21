@@ -6,7 +6,7 @@ Module documentation: Datetime operations used in gedparser.py
 import datetime
 
 
-def get_age(birt, deat=None, date_format='%Y-%m-%d'):
+def get_age(birt, deat=None, date_format='%d-%m-%Y'):
     """
     Calculate age
     @param birt: birthday
