@@ -9,7 +9,7 @@ from gedparser import GEDParser
 from sprint1.dcai_sprint1 import dates_before_current_date, birth_before_marriage
 from sprint1.sfan_sprint1 import siblings_not_marry, no_marries_to_children
 from sprint1.ysun_sprint1 import include_individual_ages, corresponding_entries
-from sprint1.zkang_sprint1 import marriage_after_14, birth_after_d_p
+from sprint1.zkang_sprint1 import marriage_after_14, birth_after_death_of_parents
 
 
 class TestSprint1(unittest.TestCase):
@@ -40,7 +40,7 @@ class TestSprint1(unittest.TestCase):
     def test_US09(self):
         p = GEDParser('res/US09.ged')
         p.parser()
-        self.assertEqual(birth_after_d_p(p.fams, p.inds),
+        self.assertEqual(birth_after_death_of_parents(p.fams, p.inds),
                          'ERROR: INDIVIDUAL: US09: @I6000000120666859850@ Child birth after parent death!')
 
     def test_US10(self):
