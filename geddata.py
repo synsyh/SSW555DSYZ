@@ -130,6 +130,20 @@ def get_ind_by_id(ind_id, inds):
     return None
 
 
+def get_fams_by_id(fam_id, fams):
+    for fam in fams:
+        if fam['id'].value == fam_id.value:
+            return fam
+    return None
+
+
+def get_name_by_id(ind_id, inds):
+    for ind in inds:
+        if ind['id'].value == ind_id.value:
+            return ind['name'].value
+    return None
+
+
 def get_inds_fams(file_name):
     p = GEDParser(file_name)
     p.parser()
