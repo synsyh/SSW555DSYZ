@@ -34,11 +34,14 @@ def too_many_siblings(fams, inds):
     There should be fewer than 15 siblings in a family
     """
     for fam in fams:
+        print(fam['id'].line)
         child_num = 0
         for child in fam['chil']:
             child_num += 1
         if child_num >= 15:
             return f"ERROR: line ", fam.line, "US15: too many siblings!"
+
+
     # for fam in fams:
     #     father_ind = get_ind_by_id(fam["husb"], inds)
     #     mother_ind = get_ind_by_id(fam["wife"], inds)
@@ -61,5 +64,6 @@ if __name__ == '__main__':
     # print(fams[0])
 
     print(parents_not_too_old(fams, inds))
+    print(too_many_siblings(fams, inds))
     # print(parents_not_too_old(fams, inds))
 
