@@ -1,7 +1,7 @@
 import unittest
 import geddata
-from zkang_sprint2 import too_many_siblings
-from zkang_sprint2 import parents_not_too_old
+from sprint2.zkang_sprint2 import too_many_siblings
+from sprint2.zkang_sprint2 import parents_not_too_old
 from sprint1.zkang_sprint1 import birth_after_death_of_parents
 from sprint1.zkang_sprint1 import marriage_after_14
 
