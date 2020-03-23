@@ -11,7 +11,7 @@ class TestSprint2(unittest.TestCase):
 
     def test_US04(self):
         inds, fams = geddata.get_inds_fams('res/US04.ged')
-        self.assertEqual(marriage_before_divorce(fams), 'ERROR: marriage should occur before divorce of spouses')
+        self.assertEqual(marriage_before_divorce(fams), 'ERROR: FAMILY: US04: 133: @F1@: Marriage should occur before divorce of spouses')
 
 
 if __name__ == '__main__':
