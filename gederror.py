@@ -1,6 +1,6 @@
-class GEDError(Exception):
-    def __init__(self, *args, **kwargs):
-        pass
+class GEDError(ValueError):
+    def __init__(self, arg):
+        self.args = arg
 
 
 class LegalError(GEDError):
