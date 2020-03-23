@@ -9,6 +9,7 @@ import prettytable
 from geddate import date_transit, get_age
 
 
+
 def left_before_right(left, right):
     if int(left[0:4]) < int(right[0:4]):
         return True

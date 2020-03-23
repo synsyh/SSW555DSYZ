@@ -5,7 +5,7 @@ Module documentation:
 """
 import prettytable
 
-from geddate import get_age
+from geddate import get_age, check_date_valid
 from gedparser2 import GEDParser, GEDNode
 
 
@@ -87,10 +87,10 @@ class GEDIndividual(GEDItem):
 
     def set_age(self):
         if self['deat'].value == 'NA':
-            self['age'] = GEDAttribute(get_age(self['birt'].value, date_format='%d %b %Y'), self['birt'].line)
+            self['age'] = GEDAttribute(get_age(self['birt'], date_format='%d %b %Y'), self['birt'].line)
             self['alive'] = GEDAttribute('True', self['birt'].line)
         else:
-            self['age'] = GEDAttribute(get_age(self['birt'].value, self['deat'].value, date_format='%d %b %Y'),
+            self['age'] = GEDAttribute(get_age(self['birt'], self['deat'], date_format='%d %b %Y'),
                                        self['birt'].line)
             self['alive'] = GEDAttribute('False', self['deat'].line)
 
@@ -127,7 +127,9 @@ def get_ind_by_id(ind_id, inds):
     for ind in inds:
         if ind['id'].value == ind_id.value:
             return ind
-    return None
+    else:
+        raise ValueError(
+            f'ERROR: INDIVIDUAL: US26: {ind_id.line}: {ind_id.value}: {ind_id.value} does not have corresponding entry.')
 
 
 def get_fams_by_id(fam_id, fams):
@@ -153,11 +155,13 @@ def get_inds_fams(file_name):
         if node.tag == 'INDI':
             ind = GEDIndividual()
             ind.node_parser(node)
+            check_date_valid(ind, 'ind')
             ind.set_age()
             inds.append(ind)
         elif node.tag == 'FAM':
             fam = GEDFamily()
             fam.node_parser(node)
+            check_date_valid(fam, 'fam')
             fam.set_spouse_name(inds)
             fams.append(fam)
     set_child(inds, fams)

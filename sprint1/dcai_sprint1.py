@@ -1,84 +1,75 @@
 import datetime
 
-from gedparser import GEDParser
+from geddata import get_inds_fams
 
 
-def dates_before_current_date(para):
+def dates_before_current_date(inds, fams):
     """
     US01: Dates (birth, marriage, divorce, death) should not be after the current date
     @param para:
     @return:
     """
-    inds = para.inds
-    fams = para.fams
     today = datetime.datetime.today()
     results = []
     for ind in inds:
-        birt = ind['birt']
-        birt = datetime.datetime.strptime(birt, '%Y-%m-%d')
+        birt = ind['birt'].value
+        birt = datetime.datetime.strptime(birt, '%d %b %Y')
         if today < birt:
-            results.append(f'ERROR: INDIVIDUAL: US01: Birthday {birt} is after today')
-        try:
+            results.append(
+                f'ERROR: INDIVIDUAL: US01: {ind["birt"].line}: {ind["id"].value}: Birthday {birt} is after today')
+        if 'deat' in ind.__dict__.keys():
             deat = ind['deat']
-        except KeyError:
-            continue
-        if deat == 'NA':
-            continue
-        else:
-            deat = datetime.datetime.strptime(deat, '%Y-%m-%d')
+            deat = datetime.datetime.strptime(deat.value, '%d %b %Y')
             if today < deat:
-                results.append(f'ERROR: INDIVIDUAL: US01: Death {deat} day is after today')
+                results.append(
+                    f'ERROR: INDIVIDUAL: US01: {ind["deat"].line}: {ind["id"].value}: Death {deat} day is after today')
 
     for fam in fams:
-        marr = fam['marr']
-        marr = datetime.datetime.strptime(marr, '%Y-%m-%d')
+        marr = fam['marr'].value
+        marr = datetime.datetime.strptime(marr, '%d %b %Y')
         if today < marr:
-            results.append(f'ERROR: FAMILY: US01: Marriage date {marr} is after today')
-
-        divorced = fam['divorced']
-        if divorced == 'False':
-            continue
-        else:
-            divorced = datetime.datetime.strptime(divorced, '%Y-%m-%d')
+            results.append(
+                f'ERROR: FAMILY: US01: {fam["marr"].line}: {fam["id"].value}: Marriage date {marr} is after today')
+        if 'div' in fam.__dict__.keys():
+            divorced = datetime.datetime.strptime(fam['div'].value, '%d %b %Y')
             if today < divorced:
-                results.append(f'ERROR: FAMILY: US01: Divorce date {divorced} is after today')
+                results.append(
+                    f'ERROR: FAMILY: US01: {fam["div"].line}: {fam["id"].value}: Divorce date {divorced} is after today')
     if len(results) == 1:
         return results[0]
     elif results:
         return results
 
 
-def birth_before_marriage(para):
+def birth_before_marriage(inds, fams):
     """
     US02: Birth should occur before marriage of an individual
     @param para:
     @return:
     """
-    inds = para.inds
-    fams = para.fams
-
     for ind in inds:
         ids_fam_by_ind = ind['fams']
         for id_fam_by_ind in ids_fam_by_ind:
             for fam in fams:
-                id_fam_by_fam = fam['id']
-                if id_fam_by_fam == id_fam_by_ind:
-                    marr = fam['marr']
-                    marr = datetime.datetime.strptime(marr, '%Y-%m-%d')
-                    birt = ind['birt']
-                    birt = datetime.datetime.strptime(birt, '%Y-%m-%d')
+                id_fam_by_fam = fam['id'].value
+                if id_fam_by_fam == id_fam_by_ind.value:
+                    marr = fam['marr'].value
+                    marr = datetime.datetime.strptime(marr, '%d %b %Y')
+                    birt = ind['birt'].value
+                    birt = datetime.datetime.strptime(birt, '%d %b %Y')
                     if not birt < marr:
-                        if ind['sex'] == 'F':
-                            return f"ERROR: FAMILY: US02: Husband's birthday {birt} is after marriage date {marr}"
+                        if ind['sex'].value == 'F':
+                            return f"ERROR: FAMILY: US02: {fam['marr'].line}: {fam['id'].value}: Husband's birthday {birt} is after marriage date {marr}"
                         else:
-                            return f"ERROR: FAMILY: US02: Wife's birthday {birt} is after marriage date {marr}"
+                            return f"ERROR: FAMILY: US02: {fam['marr'].line}: {fam['id'].value}: Wife's birthday {birt} is after marriage date {marr}"
 
 
 def main():
-    p = GEDParser('res/US01_02.ged')
-    p.parser()
-    print(dates_before_current_date(p))
-    print(birth_before_marriage(p))
+    inds, fams = get_inds_fams('../res/US01_02.ged')
+    # p = GEDParser('res/US01_02.ged')
+    # p.parser()
+    print(birth_before_marriage(inds, fams))
+    # print(birth_before_marriage(p))
 
 
 if __name__ == '__main__':

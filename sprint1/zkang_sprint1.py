@@ -3,12 +3,9 @@ from gedparser import get_ind_by_id
 from gedparser import left_before_right
 
 
-def birth_after_d_p(fams, inds):
+def birth_after_death_of_parents(fams, inds):
     """
     US09: Child should born before the death of the parent.
-    :param fams:
-    :param inds:
-    :return:
     """
     # print(inds)
     # print(fams)
@@ -37,9 +34,6 @@ def birth_after_d_p(fams, inds):
 def marriage_after_14(fams, inds):
     """
     US10: Marriage date should be at least 14 years after birth date for a person
-    :param fams:
-    :param inds:
-    :return:
     """
     for item in fams:
         marriage_date = item["marr"]
@@ -65,4 +59,4 @@ def marriage_after_14(fams, inds):
 if __name__ == '__main__':
     p = GEDParser('../res/US09.ged')
     p.parser()
-    print(birth_after_d_p(p.fams, p.inds))
+    print(birth_after_death_of_parents(p.fams, p.inds))
