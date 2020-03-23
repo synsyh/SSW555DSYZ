@@ -1,7 +1,7 @@
 import unittest
 import geddata
-from dcai_sprint2 import birth_before_death
-from dcai_sprint2 import marriage_before_divorce
+from sprint2.dcai_sprint2 import birth_before_death
+from sprint2.dcai_sprint2 import marriage_before_divorce
 
 
 class TestSprint2(unittest.TestCase):
