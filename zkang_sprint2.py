@@ -15,17 +15,17 @@ def parents_not_too_old(fams, inds):
         # print(fam['wife'])
         father_ind = get_ind_by_id(fam["husb"], inds)
         fa_year_birth = datetime.datetime.strptime(str(father_ind['birt']), '%d %b %Y').year
-        print(fa_year_birth)
+        # print(fa_year_birth)
         mother_ind = get_ind_by_id(fam["wife"], inds)
         ma_year_birth = datetime.datetime.strptime(str(mother_ind['birt']), '%d %b %Y').year
         for child_id in fam['chil']:
-            print('child:')
-            print(child_id)
+            # print('child:')
+            # print(child_id)
             child_ind = get_ind_by_id(child_id, inds)
-            print(child_ind['birt'])
+            # print(child_ind['birt'])
             ch_year_birth = datetime.datetime.strptime(str(child_ind['birt']), '%d %b %Y').year
             if (ma_year_birth - ch_year_birth) > 60 or (fa_year_birth - ch_year_birth) > 80:
-                return f"ERROR: line ", child_ind["birt"].line, "US12: Parents too old!"
+                return f"ERROR: line {child_ind['birt'].line} US12: Parents too old!"
 
 
 def too_many_siblings(fams, inds):
@@ -40,16 +40,16 @@ def too_many_siblings(fams, inds):
             child_num += 1
         # print(child_num)
         if child_num >= 15:
-            return f"ERROR: line ", fam['id'].line, "US15: too many siblings!"
+            return f"ERROR: line {fam['id'].line} US15: too many siblings!"
 
 
 if __name__ == '__main__':
-    inds, fams = geddata.get_inds_fams('res/valid.ged')
+    inds, fams = geddata.get_inds_fams('res/US15.ged')
     # print(inds)
     # print(fams)
     # print(fams[0])
 
-    # print(parents_not_too_old(fams, inds))
-    # print(too_many_siblings(fams, inds))
+    print(parents_not_too_old(fams, inds))
+    print(too_many_siblings(fams, inds))
     # print(parents_not_too_old(fams, inds))
 
