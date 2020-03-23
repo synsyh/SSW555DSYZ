@@ -1,62 +1,54 @@
-from gedparser import GEDParser
-from gedparser import get_ind_by_id
-from gedparser import left_before_right
+import geddata
+from geddata import get_ind_by_id
+import datetime
 
 
 def birth_after_death_of_parents(fams, inds):
     """
     US09: Child should born before the death of the parent.
     """
-    # print(inds)
-    # print(fams)
     for fam in fams:
         father_ind = get_ind_by_id(fam["husb"], inds)
+        if str(father_ind['deat']) == 'NA':
+            fa_year_death = 9999
+        else:
+            fa_year_death = datetime.datetime.strptime(str(father_ind['deat']), '%d %b %Y').year
         mother_ind = get_ind_by_id(fam["wife"], inds)
+        if str(mother_ind['deat']) == 'NA':
+            ma_year_death = 9999
+        else:
+            ma_year_death = datetime.datetime.strptime(str(mother_ind['deat']), '%d %b %Y').year
         for child_id in fam['chil']:
+            # print('child:')
+            # print(child_id)
             child_ind = get_ind_by_id(child_id, inds)
-
-            try:
-                # print("father death :" + father_ind["deat"])
-                # print("mother death :" + mother_ind["deat"])
-                # print("child birth :" + child_ind["birt"])
-
-                if left_before_right(father_ind["deat"], child_ind["birt"]):
-                    return "ERROR: INDIVIDUAL: US09: " + child_ind["id"] + " Child birth after parent death!"
-
-                elif left_before_right(mother_ind["deat"], child_ind["birt"]):
-                    return "ERROR: INDIVIDUAL: US09: " + child_ind["id"] + " Child birth after parent death!"
-            except KeyError:
-                continue
-            except TypeError:
-                continue
+            # print(child_ind['birt'])
+            ch_year_birth = datetime.datetime.strptime(str(child_ind['birt']), '%d %b %Y').year
+            if (ma_year_death - ch_year_birth) < 0 or (fa_year_death - ch_year_birth) < 0:
+                return f"ERROR: INDIVIDUAL: line: {child_ind['birt'].line} US09: Child birth after parent death!"
 
 
 def marriage_after_14(fams, inds):
     """
     US10: Marriage date should be at least 14 years after birth date for a person
     """
-    for item in fams:
-        marriage_date = item["marr"]
-        hus_id = item["husb"]
-        wife_id = item["wife"]
-        for indi in inds:
-            if indi["id"] == hus_id or indi["id"] == wife_id:
-                # print(indi["id"])
-                # print(indi["birt"])
-                # print(marriage_date)
-                if int(marriage_date[0:4]) - int(indi["birt"][0:4]) < 14:
-                    return "ERROR: FAMILY: US10: " + (indi["id"] + " marriage before 14!")
-                elif int(marriage_date[0:4]) - int(indi["birt"][0:4]) == 14:
-                    if int(marriage_date[5:7]) - int(indi["birt"][5:7]) > 0:
-                        return "ERROR: INDIVIDUAL: US09: " + (indi["id"] + "marriage before 14!")
-                    elif int(marriage_date[5:7]) - int(indi["birt"][5:7]) == 0:
-                        if int(marriage_date[8:10]) >= int(indi["birt"][8:10]):
-                            return "ERROR: INDIVIDUAL: US09: " + (indi["id"] + "marriage before 14!")
-            else:
-                continue
+    for fam in fams:
+        father_ind = get_ind_by_id(fam["husb"], inds)
+        fa_year_birth = datetime.datetime.strptime(str(father_ind['birt']), '%d %b %Y').year
+
+        mother_ind = get_ind_by_id(fam["wife"], inds)
+        ma_year_birth = datetime.datetime.strptime(str(mother_ind['birt']), '%d %b %Y').year
+
+        marr_date = datetime.datetime.strptime(str(fam['marr']), '%d %b %Y').year
+
+        if (marr_date - fa_year_birth) < 14 or (marr_date - ma_year_birth) < 14:
+            return f"ERROR: line: {fam['marr'].line} US10: Parents less than 14 years old!"
 
 
 if __name__ == '__main__':
-    p = GEDParser('../res/US09.ged')
-    p.parser()
-    print(birth_after_death_of_parents(p.fams, p.inds))
+    inds, fams = geddata.get_inds_fams('../res/US09.ged')
+
+    print(birth_after_death_of_parents(fams, inds))
+
+    inds, fams = geddata.get_inds_fams('../res/US10.ged')
+    print(marriage_after_14(fams, inds))
