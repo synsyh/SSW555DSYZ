@@ -45,7 +45,7 @@ def first_cousin_should_not_marry(inds, fams):
         return 'all right'
 
 
-def judge_father(adult, child, line):
+def judge_father(adult, child, line, fams, inds):
     """
     judge child marries to his father or uncle
     :param adultid:
@@ -67,7 +67,7 @@ def judge_father(adult, child, line):
     return record
 
 
-def judge_mother(adult, child, line):
+def judge_mother(adult, child, line, fams, inds):
     """
     judge child marries to his mother or aunt
     :param adultid:
@@ -107,10 +107,10 @@ def aunts_and_uncles(inds, fams):
                 for fam in fams:
                     if uncle.value == fam['husb'].value:
                         if fam['wife'].value in [child.value for child in childs]:
-                            marry_error_record.extend(judge_father(uncle, fam['wife'], fam['id'].line))
+                            marry_error_record.extend(judge_father(uncle, fam['wife'], fam['id'].line, fams, inds))
                     elif uncle.value == fam['wife'].value:
                         if fam['husb'].value in [child.value for child in childs]:
-                            marry_error_record.extend(judge_mother(uncle, fam['husb'], fam['id'].line))
+                            marry_error_record.extend(judge_mother(uncle, fam['husb'], fam['id'].line, fams, inds))
             childs.clear()
             uncles.clear()
     if marry_error_record:
