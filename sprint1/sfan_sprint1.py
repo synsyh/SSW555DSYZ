@@ -37,6 +37,6 @@ def siblings_not_marry(inds, fams):
 
 
 if __name__ == '__main__':
-    inds, fams = get_inds_fams('../res/US19_20.ged')
+    inds, fams = get_inds_fams('../res/US17_18.ged')
     print(no_marries_to_children(inds, fams))
     print(siblings_not_marry(inds, fams))
