@@ -4,7 +4,7 @@ from geddata import get_inds_fams, get_fams_by_id, get_name_by_id
 def no_marries_to_children(inds, fams):
     marry_error_record = []
     for ind in inds:
-        if ind['chil']:
+        if len(ind['chil']) > 1:
             myfams = []
             for id in ind['fams']:
                 myfams.append(get_fams_by_id(id, fams))
@@ -26,7 +26,7 @@ def siblings_not_marry(inds, fams):
     error_record = []
     for fam in fams:
         for ind in inds:
-            if (ind['chil']) and len(ind['chil']) > 1:
+            if len(ind['chil']) > 1:
                 if fam['husb'] in ind['chil'] and fam['wife'] in ind['chil']:
                     name1 = get_name_by_id(fam['husb'], inds)
                     name2 = get_name_by_id(fam['wife'], inds)
