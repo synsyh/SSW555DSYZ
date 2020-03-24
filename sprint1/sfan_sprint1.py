@@ -27,9 +27,8 @@ def siblings_not_marry(inds, fams):
     for fam in fams:
         for ind in inds:
             if len(ind['chil']) > 1:
-                if fam['husb'].value in [child.value for child in ind['chil']] and fam['wife'].value in [child.value for
-                                                                                                         child in
-                                                                                                         ind['chil']]:
+                if (fam['husb'].value in [child.value for child in ind['chil']]) and (
+                        fam['wife'].value in [child.value for child in ind['chil']]):
                     name1 = get_name_by_id(fam['husb'], inds)
                     name2 = get_name_by_id(fam['wife'], inds)
                     error_record.append(
