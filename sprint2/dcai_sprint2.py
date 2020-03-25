@@ -37,6 +37,6 @@ def marriage_before_divorce(fams):
 
 
 if __name__ == '__main__':
-    inds, fams = get_inds_fams('../res/US04.ged')
-    # print(birth_before_death(inds))
+    inds, fams = get_inds_fams('../res/test_sprint2_all.ged')
+    print(birth_before_death(inds))
     print(marriage_before_divorce(fams))

@@ -120,6 +120,6 @@ def aunts_and_uncles(inds, fams):
 
 
 if __name__ == '__main__':
-    inds, fams = get_inds_fams('../res/US19_20.ged')
+    inds, fams = get_inds_fams('../res/test_sprint2_all.ged')
     print(first_cousin_should_not_marry(inds, fams))
     print(aunts_and_uncles(inds, fams))

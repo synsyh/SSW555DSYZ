@@ -60,5 +60,6 @@ def corresponding_entries(inds, fams):
 
 
 if __name__ == '__main__':
-    inds, fams = get_inds_fams('../res/US26.ged')
+    inds, fams = get_inds_fams('../res/test_all_user_stories.ged')
+    print(include_individual_ages(inds))
     print(corresponding_entries(inds, fams))

@@ -7,30 +7,33 @@ import datetime
 
 
 def check_date_valid(item, item_type, date_format='%d %b %Y'):
-    if item_type == 'ind':
-        try:
-            datetime.datetime.strptime(item['birt'].value, date_format)
-        except ValueError:
-            raise ValueError(
-                f'ERROR: INDIVIDUAL: US42: {item["birt"].line}: {item["id"].value}: Date {item["birt"].value} is not valid date.')
-        if 'deat' in item.__dict__.keys():
+    if 'birt' not in item.__dict__.keys():
+        pass
+    else:
+        if item_type == 'ind':
             try:
                 datetime.datetime.strptime(item['birt'].value, date_format)
-            except:
+            except ValueError:
                 raise ValueError(
-                    f'ERROR: INDIVIDUAL: US42: {item["birt"].line}: {item["id"].value}: Date {item["deat"].value} is not valid date.')
-    else:
-        try:
-            datetime.datetime.strptime(item['marr'].value, date_format)
-        except ValueError:
-            raise ValueError(
-                f'ERROR: INDIVIDUAL: US42: {item["marr"].line}: {item["id"].value}: Date {item["marr"].value} is not valid date.')
-        if 'div' in item.__dict__.keys():
+                    f'ERROR: INDIVIDUAL: US42: {item["birt"].line}: {item["id"].value}: Date {item["birt"].value} is not valid date.')
+            if 'deat' in item.__dict__.keys():
+                try:
+                    datetime.datetime.strptime(item['birt'].value, date_format)
+                except:
+                    raise ValueError(
+                        f'ERROR: INDIVIDUAL: US42: {item["birt"].line}: {item["id"].value}: Date {item["deat"].value} is not valid date.')
+        else:
             try:
-                datetime.datetime.strptime(item['div'].value, date_format)
-            except:
+                datetime.datetime.strptime(item['marr'].value, date_format)
+            except ValueError:
                 raise ValueError(
-                    f'ERROR: INDIVIDUAL: US42: {item["div"].line}: {item["id"].value}: Date {item["div"].value} is not valid date.')
+                    f'ERROR: INDIVIDUAL: US42: {item["marr"].line}: {item["id"].value}: Date {item["marr"].value} is not valid date.')
+            if 'div' in item.__dict__.keys():
+                try:
+                    datetime.datetime.strptime(item['div'].value, date_format)
+                except:
+                    raise ValueError(
+                        f'ERROR: INDIVIDUAL: US42: {item["div"].line}: {item["id"].value}: Date {item["div"].value} is not valid date.')
 
 
 def get_age(birt_node, deat_node=None, date_format='%d %b %Y'):
