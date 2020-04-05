@@ -12,6 +12,8 @@ def dates_before_current_date(inds, fams):
     today = datetime.datetime.today()
     results = []
     for ind in inds:
+        if 'birt' not in ind.__dict__.keys():
+            continue
         birt = ind['birt'].value
         birt = datetime.datetime.strptime(birt, '%d %b %Y')
         if today < birt:
@@ -25,6 +27,8 @@ def dates_before_current_date(inds, fams):
                     f'ERROR: INDIVIDUAL: US01: {ind["deat"].line}: {ind["id"].value}: Death {deat} day is after today')
 
     for fam in fams:
+        if 'marr' not in fam.__dict__.keys():
+            continue
         marr = fam['marr'].value
         marr = datetime.datetime.strptime(marr, '%d %b %Y')
         if today < marr:
@@ -53,6 +57,8 @@ def birth_before_marriage(inds, fams):
             for fam in fams:
                 id_fam_by_fam = fam['id'].value
                 if id_fam_by_fam == id_fam_by_ind.value:
+                    if 'birt' not in ind.__dict__.keys() or 'marr' not in fam.__dict__.keys():
+                        continue
                     marr = fam['marr'].value
                     marr = datetime.datetime.strptime(marr, '%d %b %Y')
                     birt = ind['birt'].value
@@ -65,9 +71,8 @@ def birth_before_marriage(inds, fams):
 
 
 def main():
-    inds, fams = get_inds_fams('../res/US01_02.ged')
-    # p = GEDParser('res/US01_02.ged')
-    # p.parser()
+    inds, fams = get_inds_fams('../res/test_sprint2_all.ged')
+    print(dates_before_current_date(inds, fams))
     print(birth_before_marriage(inds, fams))
     # print(birth_before_marriage(p))
 

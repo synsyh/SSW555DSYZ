@@ -52,9 +52,8 @@ class TestSprint2(unittest.TestCase):
                          ['ERROR: FAMILY: US20: line186: Yu /Xia/ marries to his aunt Nanhai /Xia/'])
 
     def test_US42(self):
-        with self.assertRaises(ValueError):
-            inds, fams = geddata.get_inds_fams('../res/US42_1.ged')
-
+        with self.assertRaises(ValueError) as e:
+            inds, fams = geddata.get_inds_fams('res/US42_1.ged')
 
 if __name__ == '__main__':
     unittest.main()

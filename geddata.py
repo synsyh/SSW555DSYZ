@@ -69,10 +69,15 @@ class GEDFamily(GEDItem):
         self.set_attributes = ['chil']
 
     def set_spouse_name(self, inds):
-        husb = get_ind_by_id(self['husb'], inds)
-        self['husb_name'] = GEDAttribute(husb['name'].value, husb['name'].line)
-        wife = get_ind_by_id(self['wife'], inds)
-        self['wife_name'] = GEDAttribute(wife['name'].value, wife['name'].line)
+        try:
+            husb = get_ind_by_id(self['husb'], inds)
+            wife = get_ind_by_id(self['wife'], inds)
+        except ValueError:
+            self['husb_name'] = GEDAttribute('NA', -1)
+            self['wife_name'] = GEDAttribute('NA', -1)
+        else:
+            self['husb_name'] = GEDAttribute(husb['name'].value, husb['name'].line)
+            self['wife_name'] = GEDAttribute(wife['name'].value, wife['name'].line)
 
 
 class GEDIndividual(GEDItem):
@@ -86,13 +91,16 @@ class GEDIndividual(GEDItem):
         self.set_attributes = ['famc', 'fams']
 
     def set_age(self):
-        if self['deat'].value == 'NA':
-            self['age'] = GEDAttribute(get_age(self['birt'], date_format='%d %b %Y'), self['birt'].line)
-            self['alive'] = GEDAttribute('True', self['birt'].line)
+        if self['birt'].value == 'NA':
+            pass
         else:
-            self['age'] = GEDAttribute(get_age(self['birt'], self['deat'], date_format='%d %b %Y'),
-                                       self['birt'].line)
-            self['alive'] = GEDAttribute('False', self['deat'].line)
+            if self['deat'].value == 'NA':
+                self['age'] = GEDAttribute(get_age(self['birt'], date_format='%d %b %Y'), self['birt'].line)
+                self['alive'] = GEDAttribute('True', self['birt'].line)
+            else:
+                self['age'] = GEDAttribute(get_age(self['birt'], self['deat'], date_format='%d %b %Y'),
+                                           self['birt'].line)
+                self['alive'] = GEDAttribute('False', self['deat'].line)
 
 
 def print_fams(fams):
@@ -117,10 +125,14 @@ def print_inds(inds):
 
 def set_child(inds, fams):
     for fam in fams:
-        husb = get_ind_by_id(fam['husb'], inds)
-        wife = get_ind_by_id(fam['wife'], inds)
-        husb['chil'] += fam['chil']
-        wife['chil'] += fam['chil']
+        try:
+            husb = get_ind_by_id(fam['husb'], inds)
+            wife = get_ind_by_id(fam['wife'], inds)
+        except ValueError:
+            continue
+        else:
+            husb['chil'] += fam['chil']
+            wife['chil'] += fam['chil']
 
 
 def get_ind_by_id(ind_id, inds):
@@ -169,6 +181,6 @@ def get_inds_fams(file_name):
 
 
 if __name__ == '__main__':
-    inds, fams = get_inds_fams('res/valid.ged')
+    inds, fams = get_inds_fams('res/test_sprint2_all.ged')
     print_inds(inds)
     print_fams(fams)
