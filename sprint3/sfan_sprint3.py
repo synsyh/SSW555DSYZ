@@ -24,6 +24,12 @@ def correct_gender(inds, fams):
 
 
 def unique_id(inds, fams):
+    """
+    every id must unique
+    :param inds:
+    :param fams:
+    :return: list of error inforamtion
+    """
     record = []
     for ind in inds:
         for ind2 in inds[inds.index(ind)+1:]:
