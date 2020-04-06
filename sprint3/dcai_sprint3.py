@@ -60,4 +60,5 @@ def divorce_before_death(inds, fams):
 
 if __name__ == '__main__':
     inds, fams = get_inds_fams('../res/US06.ged')
+    print(marriage_before_death(inds,fams))
     print(divorce_before_death(inds, fams))

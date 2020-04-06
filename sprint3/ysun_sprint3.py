@@ -35,4 +35,14 @@ def list_deceased(inds, fams):
 
 if __name__ == '__main__':
     inds, fams = get_inds_fams('../res/test_all_user_stories.ged')
-    list_deceased(inds, fams)
+    for ind in list_deceased(inds, fams):
+        print(ind['name'].value)
+    order_sibling_by_age(inds, fams)
+    record_all = []
+    for fam in fams:
+        record = []
+        for child in fam['chil']:
+            child_ind = get_ind_by_id(child,inds)
+            record.append(child_ind['age'].value)
+            record_all.extend([record])
+    print(record_all)
