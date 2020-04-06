@@ -25,7 +25,11 @@ def order_sibling_by_age(inds, fams):
             pass
         chils = sorted(chils, key=lambda ind: datetime.datetime.strptime(ind['birt'].value, '%d %b %Y').timestamp())
         fam['chil'] = [chil['id'] for chil in chils]
-    return fams
+    results = ''
+    for fam in fams:
+        if 'chil' in fam.__dict__.keys() and len(fam['chil']) != 0:
+            results += f"Family ID: {fam['id'].value}, Family Sibling ordered by age: {', '.join([c.value for c in fam['chil']])} \n"
+    return results
 
 
 def list_deceased(inds):
@@ -35,11 +39,10 @@ def list_deceased(inds):
     @param inds:
     @return:
     """
-    return [ind for ind in inds if 'deat' in ind.__dict__.keys()]
+    deceased_inds = [ind['id'].value for ind in inds if 'deat' in ind.__dict__.keys()]
+    return 'All deceased individuals in a GEDCOM file: ' + ', '.join(deceased_inds)
 
 
 if __name__ == '__main__':
-    inds, fams = get_inds_fams('../res/US29.ged')
-    deceased_inds = list_deceased(inds)
-    for ind in deceased_inds:
-        print(ind['id'].value)
+    inds, fams = get_inds_fams('../res/US28.ged')
+    print(order_sibling_by_age(inds, fams))

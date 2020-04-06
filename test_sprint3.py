@@ -42,21 +42,16 @@ class Testsprint3(unittest.TestCase):
 
     def test_28(self):
         inds, fams = get_inds_fams('res/US28.ged')
-        order_sibling_by_age(inds, fams)
-        record_all = []
-        for fam in fams:
-            record = []
-            for child in fam['chil']:
-                child_ind = get_ind_by_id(child, inds)
-                record.append(child_ind['age'].value)
-                record_all.extend([record])
-        self.assertEqual(record_all, [[24], [21], [51, 50, 45], [51, 50, 45], [51, 50, 45], [24], [27]])
+        self.assertEqual(order_sibling_by_age(inds, fams), """Family ID: @F3@, Family Sibling ordered by age: @I1@ 
+Family ID: @F4@, Family Sibling ordered by age: @I10@ 
+Family ID: @F5@, Family Sibling ordered by age: @I6@, @I2@, @I13@ 
+Family ID: @F6@, Family Sibling ordered by age: @I8@ 
+Family ID: @F7@, Family Sibling ordered by age: @I11@ 
+""")
 
     def test_29(self):
         inds, _ = get_inds_fams('res/US29.ged')
-        deceased_inds = list_deceased(inds)
-        deceased_inds = [ind['id'].value for ind in deceased_inds]
-        self.assertEqual(deceased_inds, ['@I7@', '@I8@', '@I10@', '@I11@'])
+        self.assertEqual(list_deceased(inds), 'All deceased individuals in a GEDCOM file: @I7@, @I8@, @I10@, @I11@')
 
 
 if __name__ == '__main__':

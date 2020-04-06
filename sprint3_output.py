@@ -49,7 +49,7 @@ def output():
             check_date_valid(fam, 'fam')
     except ValueError as e:
         print(e)
-    # Sprint4
+    # Sprint3
     # Danping Cai
     print(','.join(marriage_before_death(inds, fams)))
     print(','.join(divorce_before_death(inds, fams)))
@@ -60,6 +60,8 @@ def output():
     print(','.join(multiple_births(fams, inds)))
     print(','.join(male_last_names(fams, inds)))
     # Yuning Sun
+    print(order_sibling_by_age(inds, fams))
+    print(list_deceased(inds))
 
 
 if __name__ == '__main__':
