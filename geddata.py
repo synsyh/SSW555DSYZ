@@ -136,12 +136,17 @@ def set_child(inds, fams):
 
 
 def get_ind_by_id(ind_id, inds):
-    for ind in inds:
-        if ind['id'].value == ind_id.value:
-            return ind
+    if isinstance(ind_id, str):
+        for ind in inds:
+            if ind['id'].value == ind_id:
+                return ind
     else:
-        raise ValueError(
-            f'ERROR: INDIVIDUAL: US26: {ind_id.line}: {ind_id.value}: {ind_id.value} does not have corresponding entry.')
+        for ind in inds:
+            if ind['id'].value == ind_id.value:
+                return ind
+        else:
+            raise ValueError(
+                f'ERROR: INDIVIDUAL: US26: {ind_id.line}: {ind_id.value}: {ind_id.value} does not have corresponding entry.')
 
 
 def get_fams_by_id(fam_id, fams):
@@ -181,6 +186,6 @@ def get_inds_fams(file_name):
 
 
 if __name__ == '__main__':
-    inds, fams = get_inds_fams('res/test_sprint2_all.ged')
+    inds, fams = get_inds_fams('res/valid.ged')
     print_inds(inds)
     print_fams(fams)
