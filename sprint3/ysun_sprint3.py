@@ -5,10 +5,17 @@ Module documentation:
 """
 import datetime
 
-from geddata import get_inds_fams, get_ind_by_id, GEDAttribute
+from geddata import get_inds_fams, get_ind_by_id
 
 
 def order_sibling_by_age(inds, fams):
+    """
+    US 28
+    List siblings in families by decreasing age, i.e. oldest siblings first
+    @param inds:
+    @param fams:
+    @return:
+    """
     for fam in fams:
         chils = [get_ind_by_id(chil, inds) for chil in fam['chil']]
         chils = [ind if 'birt' in ind.__dict__.keys() else None for ind in chils]
@@ -21,28 +28,18 @@ def order_sibling_by_age(inds, fams):
     return fams
 
 
-def list_deceased(inds, fams):
-    id_inds_deceased = set()
-    for fam in fams:
-        if 'div' in fam.__dict__.keys():
-            id_inds_deceased.add(fam['husb'].value)
-            id_inds_deceased.add(fam['wife'].value)
-    inds_deceased = [get_ind_by_id(ind_id, inds) for ind_id in id_inds_deceased]
-    return inds_deceased
-
-
+def list_deceased(inds):
+    """
+    US 29
+    List all deceased individuals in a GEDCOM file
+    @param inds:
+    @return:
+    """
+    return [ind for ind in inds if 'deat' in ind.__dict__.keys()]
 
 
 if __name__ == '__main__':
-    inds, fams = get_inds_fams('../res/test_all_user_stories.ged')
-    for ind in list_deceased(inds, fams):
-        print(ind['name'].value)
-    order_sibling_by_age(inds, fams)
-    record_all = []
-    for fam in fams:
-        record = []
-        for child in fam['chil']:
-            child_ind = get_ind_by_id(child,inds)
-            record.append(child_ind['age'].value)
-            record_all.extend([record])
-    print(record_all)
+    inds, fams = get_inds_fams('../res/US29.ged')
+    deceased_inds = list_deceased(inds)
+    for ind in deceased_inds:
+        print(ind['id'].value)

@@ -1,5 +1,5 @@
 import unittest
-from geddata import get_inds_fams,get_ind_by_id
+from geddata import get_inds_fams, get_ind_by_id
 from sprint3.sfan_sprint3 import unique_id, correct_gender
 from sprint3.dcai_sprint3 import divorce_before_death, marriage_before_death
 from sprint3.ysun_sprint3 import list_deceased, order_sibling_by_age
@@ -50,10 +50,14 @@ class Testsprint3(unittest.TestCase):
                 child_ind = get_ind_by_id(child, inds)
                 record.append(child_ind['age'].value)
                 record_all.extend([record])
-        self.assertEqual(record_all,[[24], [21], [51, 50, 45], [51, 50, 45], [51, 50, 45], [24], [27]])
+        self.assertEqual(record_all, [[24], [21], [51, 50, 45], [51, 50, 45], [51, 50, 45], [24], [27]])
+
+    def test_29(self):
+        inds, _ = get_inds_fams('res/US29.ged')
+        deceased_inds = list_deceased(inds)
+        deceased_inds = [ind['id'].value for ind in deceased_inds]
+        self.assertEqual(deceased_inds, ['@I7@', '@I8@', '@I10@', '@I11@'])
 
 
 if __name__ == '__main__':
     unittest.main()
-
-
