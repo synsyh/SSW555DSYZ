@@ -57,8 +57,8 @@ def output():
     print(','.join(correct_gender(inds, fams)))
     print(','.join(unique_id(inds, fams)))
     # Zihao Kang
-    print(','.join(multiple_births(fams, inds)))
-    print(','.join(male_last_names(fams, inds)))
+    print(multiple_births(fams, inds))
+    print(male_last_names(fams, inds))
     # Yuning Sun
     print(order_sibling_by_age(inds, fams))
     print(list_deceased(inds))

@@ -40,7 +40,7 @@ def list_deceased(inds):
     @return:
     """
     deceased_inds = [ind['id'].value for ind in inds if 'deat' in ind.__dict__.keys()]
-    return 'All deceased individuals in a GEDCOM file: ' + ', '.join(deceased_inds)
+    return 'All deceased individuals in the GEDCOM file: ' + ', '.join(deceased_inds)
 
 
 if __name__ == '__main__':

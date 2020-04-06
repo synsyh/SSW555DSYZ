@@ -33,14 +33,12 @@ def male_last_names(fams, inds):
         if 'sex' not in father_ind.__dict__.keys():
             continue
         fa_name = str(father_ind['name'])
-        print(fa_name)
         for child_id in fam['chil']:
             # print('child:')
             # print(child_id)
             child_ind = get_ind_by_id(child_id, inds)
             ch_name = str(child_ind['name'])
             ch_gender = str(child_ind['sex'])
-            print(ch_name)
             # print(str(ch_name)[-3:])
             # print(ch_gender == 'M')
             if 'sex' not in child_ind.__dict__.keys():
