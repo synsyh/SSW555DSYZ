@@ -8,7 +8,7 @@
 |  @I5@ |     Li /Ma/     |   F    | 11 DEC 1971 |  49 |  True |      NA     |                                                            @I1@                                                            |     @F1@     |
 |  @I6@ |  Jiahui /Wang/  |   F    | 23 NOV 1950 |  70 |  True |      NA     |                                                     @I2@, @I28@, @I29@                                                     |     @F3@     |
 |  @I7@ |    Ming /Xia/   |   M    | 11 AUG 1945 |  67 | False | 14 SEP 2012 |                                                     @I2@, @I28@, @I29@                                                     |     @F3@     |
-|  @I8@ |   Yitong /Hu/   |   M    |  1 MAR 1966 |  34 | False |  1 OCT 2000 |                                                            @I9@                                                            |     @F4@     |
+|  @I8@ |   Yitong /Hu/   |   M    |  1 MAR 1966 |  33 | False |  1 OCT 1999 |                                                            @I9@                                                            |     @F4@     |
 |  @I9@ |    Xing /Liu/   |   M    | 22 JUN 1996 |  24 |  True |      NA     |                                                                                                                            |              |
 | @I10@ |   Yishou /Liu/  |   M    | 12 AUG 1849 | 150 | False |  3 MAR 1999 |                                                            @I3@                                                            |     @F5@     |
 | @I11@ |  Tiaozi /Zhang/ |   F    |  3 JAN 1852 | 146 | False | 16 APR 1998 |                                                            @I3@                                                            |     @F5@     |
@@ -22,7 +22,7 @@
 | @I19@ |     Yu /Xia/    |   M    | 12 APR 2006 |  14 |  True |      NA     |                                                                                                                            |              |
 | @I20@ |     Yu /Xia/    |   M    | 12 APR 2006 |  14 |  True |      NA     |                                                                                                                            |              |
 | @I21@ |     Yu /Xia/    |   M    | 12 APR 2006 |  14 |  True |      NA     |                                                                                                                            |              |
-| @I22@ |     Yu /Xia/    |   M    | 12 APR 2006 |  14 |  True |      NA     |                                                                                                                            |              |
+| @I22@ |     Yu /Li/     |   M    | 12 APR 2006 |  14 |  True |      NA     |                                                                                                                            |              |
 | @I23@ |     Yu /Xia/    |   M    | 12 APR 2006 |  14 |  True |      NA     |                                                                                                                            |              |
 | @I24@ |     Yu /Xia/    |   M    | 12 APR 2006 |  14 |  True |      NA     |                                                                                                                            |              |
 | @I25@ |     Yu /Xia/    |   M    | 12 APR 2006 |  14 |  True |      NA     |                                                                                                                            |              |
@@ -33,20 +33,21 @@
 | @I30@ |  Nanhai /Shang/ |   F    | 13 APR 1970 |  50 |  True |      NA     |                                                           @I31@                                                            |     @F7@     |
 | @I31@ |   Bingbao /Xia/ |   F    | 13 APR 1994 |  26 |  True |      NA     |                                                                                                                            |              |
 | @I32@ |    Xue /Xia/    |   M    | 12 MAY 1993 |  27 |  True |      NA     |                                                                                                                            |    @F15@     |
-| @I33@ |  Donghai /Xia/  |   M    | 19 DEC 1969 |  51 |  True |      NA     |                                                 @I32@, @I44@, @I45@, @I35@                                                 | @F10@, @F11@ |
+| @I33@ |  Donghai /Xia/  |   M    | 19 DEC 1969 |  51 |  True |      NA     |                                                 @I32@, @I45@, @I44@, @I35@                                                 | @F10@, @F11@ |
 | @I34@ |    Mei /Liu/    |   F    |  3 MAR 1970 |  50 |  True |      NA     |                                                        @I35@, @I40@                                                        | @F11@, @F13@ |
 | @I35@ |     Yu /Xia/    |   M    | 12 APR 2006 |  14 |  True |      NA     |                                                                                                                            |              |
-| @I36@ |     Li /Ma/     |   F    | 11 DEC 1971 |  49 |  True |      NA     |                                                    @I32@, @I44@, @I45@                                                     | @F10@, @F15@ |
-| @I37@ |  Jiahui /Wang/  |   F    | 23 NOV 1950 |  70 |  True |      NA     |                                                        @I33@, @I43@                                                        |    @F12@     |
-| @I38@ |    Ming /Xia/   |   M    | 11 AUG 1945 |  67 | False | 14 SEP 2012 |                                                        @I33@, @I43@                                                        |    @F12@     |
+| @I36@ |     Li /Ma/     |   F    | 11 DEC 1971 |  49 |  True |      NA     |                                                    @I32@, @I45@, @I44@                                                     | @F10@, @F15@ |
+| @I37@ |  Jiahui /Wang/  |   M    | 23 NOV 1950 |  70 |  True |      NA     |                                                        @I33@, @I43@                                                        |    @F12@     |
+| @I38@ |    Ming /Xia/   |   F    | 11 AUG 1945 |  67 | False | 14 SEP 2012 |                                                        @I33@, @I43@                                                        |    @F12@     |
 | @I39@ |   Yitong /Hu/   |   M    |  1 MAR 1966 |  34 | False |  1 OCT 2000 |                                                           @I40@                                                            |    @F13@     |
 | @I40@ |    Xing /Liu/   |   M    | 22 JUN 1996 |  24 |  True |      NA     |                                                                                                                            |              |
-| @I41@ |   Yishou /Liu/  |   M    | 12 AUG 1949 |  50 | False |  3 MAR 1999 |                                                           @I34@                                                            |    @F14@     |
+| @I41@ |   Yishou /Liu/  |   M    | 12 AUG 1949 |  24 | False |  3 MAR 1973 |                                                           @I34@                                                            |    @F14@     |
 | @I42@ |  Tiaozi /Zhang/ |   F    |  3 JAN 1952 |  46 | False | 16 APR 1998 |                                                           @I34@                                                            |              |
 | @I43@ |   Nanhai /Xia/  |   F    |  3 JAN 2013 |  7  |  True |      NA     |                                                                                                                            |    @F14@     |
-| @I44@ |   Xihai /Xia/   |   M    |  3 JAN 1994 |  26 |  True |      NA     |                                                                                                                            |    @F16@     |
 | @I45@ |   Nanhai /Xia/  |   F    |  3 JAN 1995 |  25 |  True |      NA     |                                                                                                                            |    @F16@     |
+| @I44@ |   Xihai /Xia/   |   M    |  3 JAN 1994 |  26 |  True |      NA     |                                                                                                                            |    @F16@     |
 | @I46@ |    Nan /Xia/    |   F    |  3 JAN 1995 |  25 |  True |      NA     |                                                                                                                            |    @F16@     |
+| @I46@ |    Nan2 /Xia/   |   F    |  3 JAN 1995 |  25 |  True |      NA     |                                                                                                                            |    @F16@     |
 +-------+-----------------+--------+-------------+-----+-------+-------------+----------------------------------------------------------------------------------------------------------------------------+--------------+
 +-------+-------------+-------------+------------+---------------+---------+-----------------+----------------------------------------------------------------------------------------------------------------------+
 |   ID  |   Married   |   Divorced  | Husband ID |  Husband Name | Wife ID |    Wife Name    |                                                       Children                                                       |
@@ -59,26 +60,44 @@
 |  @F6@ | 13 MAR 2019 |      NA     |   @I28@    |  Xihai /Xia/  |   @I1@  |    Xue /Xia/    |                                                                                                                      |
 |  @F7@ | 13 MAR 1992 |      NA     |   @I29@    |  Nanhai /Xia/ |  @I30@  |  Nanhai /Shang/ |                                                        @I31@                                                         |
 |  @F8@ | 13 MAR 2019 | 13 MAR 2018 |    @I4@    |    Yu /Xia/   |  @I31@  |   Bingbao /Xia/ |                                                                                                                      |
-| @F10@ | 12 DEC 1992 | 12 AUG 2002 |   @I33@    | Donghai /Xia/ |  @I36@  |     Li /Ma/     |                                                 @I32@, @I44@, @I45@                                                  |
+| @F10@ | 12 DEC 1992 | 12 AUG 2002 |   @I33@    | Donghai /Xia/ |  @I36@  |     Li /Ma/     |                                                 @I32@, @I45@, @I44@                                                  |
 | @F11@ |  6 JUN 2005 |      NA     |   @I33@    | Donghai /Xia/ |  @I34@  |    Mei /Liu/    |                                                        @I35@                                                         |
 | @F13@ |  5 MAY 1995 |  1 OCT 2000 |   @I39@    |  Yitong /Hu/  |  @I34@  |    Mei /Liu/    |                                                        @I40@                                                         |
 | @F12@ |  7 JUL 1952 |      NA     |   @I38@    |   Ming /Xia/  |  @I37@  |  Jiahui /Wang/  |                                                     @I33@, @I43@                                                     |
 | @F14@ | 13 MAR 1974 |      NA     |   @I41@    |  Yishou /Liu/ |  @I42@  |  Tiaozi /Zhang/ |                                                        @I34@                                                         |
 | @F15@ | 13 MAR 2019 |      NA     |   @I32@    |   Xue /Xia/   |  @I36@  |     Li /Ma/     |                                                                                                                      |
 | @F16@ | 13 MAR 2021 |      NA     |   @I44@    |  Xihai /Xia/  |  @I45@  |   Nanhai /Xia/  |                                                                                                                      |
+| @F16@ | 13 MAR 2021 |      NA     |   @I44@    |  Xihai /Xia/  |  @I45@  |   Nanhai /Xia/  |                                                                                                                      |
 +-------+-------------+-------------+------------+---------------+---------+-----------------+----------------------------------------------------------------------------------------------------------------------+
-ERROR: FAMILY: US01: 559: @F16@: Marriage date 2021-03-13 00:00:00 is after today
-ERROR: FAMILY: US02: 548: @F14@: Husband's birthday 2013-01-03 00:00:00 is after marriage date 1974-03-13 00:00:00
+['ERROR: FAMILY: US01: 565: @F16@: Marriage date 2021-03-13 00:00:00 is after today', 'ERROR: FAMILY: US01: 570: @F16@: Marriage date 2021-03-13 00:00:00 is after today']
+ERROR: FAMILY: US02: 554: @F14@: Husband's birthday 2013-01-03 00:00:00 is after marriage date 1974-03-13 00:00:00
 ERROR: INDIVIDUAL: 411: US09: Child birth after parent death!
-ERROR: FAMILY: 505: US10: Parents less than 14 years old!
-ERROR: FAMILY: US17: line 550: Xue /Xia/ marries to his mother Li /Ma/
-ERROR: FAMILY: line 555US18 :the couple Xihai /Xia/ and Nanhai /Xia/ are siblings, ERROR: FAMILY: line 555US18 :the couple Xihai /Xia/ and Nanhai /Xia/ are siblings
+ERROR: FAMILY: 511: US10: Parents less than 14 years old!
+ERROR: FAMILY: US17: line 556: Xue /Xia/ marries to his mother Li /Ma/
+ERROR: FAMILY: line 561US18 :the couple Xihai /Xia/ and Nanhai /Xia/ are siblings, ERROR: FAMILY: line 561US18 :the couple Xihai /Xia/ and Nanhai /Xia/ are siblings, ERROR: FAMILY: line 566US18 :the couple Xihai /Xia/ and Nanhai /Xia/ are siblings, ERROR: FAMILY: line 566US18 :the couple Xihai /Xia/ and Nanhai /Xia/ are siblings
 ERROR: INDIVIDUAL: US27: 35: @I3@: @I3@ have no age information.
-ERROR: INDIVIDUAL: US26: 425: @I46@: @I46@ cannot find corresponding families.
+ERROR: INDIVIDUAL: US26: 425: @I46@: @I46@ cannot find corresponding families., ERROR: INDIVIDUAL: US26: 431: @I46@: @I46@ cannot find corresponding families.
 ERROR: INDIVIDUAL: US03: 131: @I12@: Birthday 2006-04-12 00:00:00 is after death.
-ERROR: FAMILY: US04: 507: @F8@: Marriage should occur before divorce of spouses
+ERROR: FAMILY: US04: 513: @F8@: Marriage should occur before divorce of spouses
 ERROR: FAMILY: LINE: 411 US12: Parents too old!
-ERROR: FAMILY: LINE: 440 US15: too many siblings!
-ERROR: FAMILY: US19: line501: Couple Yu /Xia/ and  Bingbao /Xia/ are first cousins,ERROR: FAMILY: US19: line555: Couple Xihai /Xia/ and Nanhai /Xia/ are first cousins
-ERROR: FAMILY: US20: line488:Xue /Xia/ marries to her ancle Xihai /Xia/
+ERROR: FAMILY: LINE: 446 US15: too many siblings!
+ERROR: FAMILY: US19: line507: Couple Yu /Xia/ and  Bingbao /Xia/ are first cousins,ERROR: FAMILY: US19: line561: Couple Xihai /Xia/ and Nanhai /Xia/ are first cousins,ERROR: FAMILY: US19: line566: Couple Xihai /Xia/ and Nanhai /Xia/ are first cousins
+ERROR: FAMILY: US20: line494:Xue /Xia/ marries to her ancle Xihai /Xia/
 ERROR: INDIVIDUAL: US42: 31: @I2@: Date 30 FEB 1969 is not valid date.
+ERROR: FAMILY: US05: 554: @I41@: Marriage 13 MAR 1974 is after death.
+ERROR: FAMILY: US06: 476: @I8@: Divorce 1 OCT 2000 is after death.
+ERROR: FAMILY: US21: line542: gender of husband in family should be male,ERROR: FAMILY: US21: line543: gender of wife in family should be female
+ERROR: INDIVIDUAL: US22: line425 and line431: These 2 individuals have same id,ERROR: FAMILY: US22: line561 and line566: These 2 families have same id
+ERROR: FAMILY: LINE: 51 US12: more than five siblings born at the same time!
+ERROR: FAMILY: LINE: 217 US16: All male members of a family should have the same last name!
+Family ID: @F1@, Family Sibling ordered by age: @I1@
+Family ID: @F2@, Family Sibling ordered by age: @I4@, @I12@, @I13@, @I14@, @I15@, @I16@, @I17@, @I18@, @I19@, @I20@, @I21@, @I22@, @I23@, @I24@, @I25@, @I27@, @I26@
+Family ID: @F4@, Family Sibling ordered by age: @I9@
+Family ID: @F3@, Family Sibling ordered by age: @I2@, @I28@, @I29@
+Family ID: @F7@, Family Sibling ordered by age: @I31@
+Family ID: @F10@, Family Sibling ordered by age: @I32@, @I44@, @I45@
+Family ID: @F11@, Family Sibling ordered by age: @I35@
+Family ID: @F13@, Family Sibling ordered by age: @I40@
+Family ID: @F12@, Family Sibling ordered by age: @I33@, @I43@
+Family ID: @F14@, Family Sibling ordered by age: @I34@
+All deceased individuals in the GEDCOM file: @I7@, @I8@, @I10@, @I11@, @I12@, @I38@, @I39@, @I41@, @I42@
