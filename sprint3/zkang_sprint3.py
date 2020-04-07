@@ -50,6 +50,6 @@ def male_last_names(fams, inds):
 if __name__ == '__main__':
     inds, fams = geddata.get_inds_fams('../res/US16.ged')
     print(male_last_names(fams, inds))
-    inds, fams = geddata.get_inds_fams('../res/US15.ged')
+    inds, fams = geddata.get_inds_fams('../res/US14.ged')
     print(multiple_births(fams, inds))
 

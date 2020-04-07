@@ -21,10 +21,10 @@ class Testsprint3(unittest.TestCase):
     def test_14(self):
         inds, fams = get_inds_fams('res/US14.ged')
         self.assertEqual(multiple_births(fams, inds),
-                         'ERROR: FAMILY: LINE: 31 US12: more than five siblings born at the same time!')
+                         'ERROR: FAMILY: LINE: 31 US14: more than five siblings born at the same time!')
 
-    def test_15(self):
-        inds, fams = get_inds_fams('res/US15.ged')
+    def test_16(self):
+        inds, fams = get_inds_fams('res/US16.ged')
         self.assertEqual(male_last_names(fams, inds),
                          'ERROR: FAMILY: LINE: 47 US16: All male members of a family should have the same last name!')
 
