@@ -1,5 +1,6 @@
 import geddata
 from geddata import get_ind_by_id
+from geddata import get_fams_by_id
 import datetime
 
 
@@ -8,7 +9,21 @@ def no_bigamy(fams, inds):
     US11: No bigamy
     Marriage should not occur during marriage to another spouse
     """
-    pass
+    for ind in inds:
+        # print(ind)
+        # print(ind.fams)
+        married_flag = 0
+        # print(ind['name'].line)
+        for item in ind.fams:
+            fam = get_fams_by_id(item, fams)
+            # print(fam.attributes)
+            # print(fam['marr'])
+            # print(bool(fam['marr']))
+            # print(str(fam['div']) == 'NA')
+            if bool(fam.marr) and str(fam['div']) == 'NA':
+                married_flag += 1
+            if married_flag >= 2:
+                return f"ERROR: INDIVIDUAL: line{ind['id'].line} US11: Marriage should not occur during marriage to another spouse!"
 
 
 def siblings_spacing(fams, inds):
@@ -32,8 +47,11 @@ def siblings_spacing(fams, inds):
 
 
 if __name__ == '__main__':
+    inds, fams = geddata.get_inds_fams('../res/US11.ged')
+    print(no_bigamy(fams, inds))
     inds, fams = geddata.get_inds_fams('../res/US13.ged')
     print(siblings_spacing(fams, inds))
+    # print(siblings_spacing(fams, inds))
     # child_birth_date_list = []
     # for fam in fams:
     #     for child_id in fam['chil']:

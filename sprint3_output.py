@@ -14,7 +14,7 @@ from sprint3.ysun_sprint3 import list_deceased, order_sibling_by_age
 
 
 def output():
-    inds, fams = get_inds_fams('res/test_all_user_stories.ged')
+    inds, fams = get_inds_fams('res/US11.ged')
     print_inds(inds)
     print_fams(fams)
     # Sprint1
