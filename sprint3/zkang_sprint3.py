@@ -20,7 +20,7 @@ def multiple_births(fams, inds):
                 child_birth_year_list.append(ch_birth_year_month)
                 child_birth_year_set.add(ch_birth_year_month)
                 if len(child_birth_year_list) - len(child_birth_year_set) < 5:
-                    return f"ERROR: FAMILY: LINE: {child_ind['birt'].line} US12: more than five siblings born at the same time!"
+                    return f"ERROR: FAMILY: LINE: {child_ind['birt'].line} US14: more than five siblings born at the same time!"
 
 
 def male_last_names(fams, inds):
