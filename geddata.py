@@ -186,6 +186,6 @@ def get_inds_fams(file_name):
 
 
 if __name__ == '__main__':
-    inds, fams = get_inds_fams('res/valid.ged')
+    inds, fams = get_inds_fams('res/test_all_user_stories.ged')
     print_inds(inds)
     print_fams(fams)

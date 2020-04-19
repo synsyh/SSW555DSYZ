@@ -27,7 +27,7 @@ class TestSprint2(unittest.TestCase):
     def test_US09(self):
         inds, fams = geddata.get_inds_fams('res/US09.ged')
         self.assertEqual(birth_after_death_of_parents(fams, inds),
-                         'ERROR: INDIVIDUAL: line: 42 US09: Child birth after parent death!')
+                         'ERROR: INDIVIDUAL: LINE: 42: US09: Child birth after parent death!')
 
     def test_US10(self):
         inds, fams = geddata.get_inds_fams('res/US10.ged')

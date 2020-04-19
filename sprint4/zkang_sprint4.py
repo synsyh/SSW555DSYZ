@@ -49,7 +49,7 @@ def siblings_spacing(fams, inds):
 if __name__ == '__main__':
     inds, fams = geddata.get_inds_fams('../res/US11.ged')
     print(no_bigamy(fams, inds))
-    inds, fams = geddata.get_inds_fams('../res/US13.ged')
+    inds, fams = geddata.get_inds_fams('../res/test_all_user_stories.ged')
     print(siblings_spacing(fams, inds))
     # print(siblings_spacing(fams, inds))
     # child_birth_date_list = []

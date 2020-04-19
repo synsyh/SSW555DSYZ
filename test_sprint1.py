@@ -42,23 +42,23 @@ class TestSprint1(unittest.TestCase):
     def test_US09(self):
         inds, fams = get_inds_fams('res/US09.ged')
         self.assertEqual(birth_after_death_of_parents(fams, inds),
-                         'ERROR: INDIVIDUAL: line: 42 US09: Child birth after parent death!')
+                         'ERROR: INDIVIDUAL: LINE: 42: US09: Child birth after parent death!')
 
     def test_US10(self):
         inds, fams = get_inds_fams('res/US10.ged')
         self.assertEqual(marriage_after_14(fams, inds),
-                         'ERROR: line: 156 US10: Parents less than 14 years old!')
+                         'ERROR: FAMILY: LINE: 156: US10: Parents less than 14 years old!')
 
-    # def test_US17(self):
-    #     inds, fams = get_inds_fams('res/US17_18.ged')
-    #     self.assertEqual(no_marries_to_children(inds, fams),
-    #                      ['ERROR: FAMILY: US17: LI /Fan/ marries to his mother Chloe /Zhang/'])
-    #
-    # def test_US18(self):
-    #     inds, fams = get_inds_fams('res/US17_18.ged')
-    #
-    #     self.assertEqual(siblings_not_marry(inds, fams),
-    #                      ['ERROR: FAMILY: US18 :the couple Stuart /Fan/ and Ally /Jiang/ are siblings'])
+    def test_US17(self):
+        inds, fams = get_inds_fams('res/US17_18.ged')
+        self.assertEqual(no_marries_to_children(inds, fams),
+                         ['ERROR: FAMILY: US17: line 171: LI /Fan/ marries to his mother Chloe /Zhang/'])
+
+    def test_US18(self):
+        inds, fams = get_inds_fams('res/US17_18.ged')
+
+        self.assertEqual(siblings_not_marry(inds, fams),
+                         ['ERROR: FAMILY: US18 :the couple Stuart /Fan/ and Ally /Jiang/ are siblings'])
 
     def test_US26(self):
         inds, fams = get_inds_fams('res/US26.ged')

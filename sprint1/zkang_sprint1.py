@@ -27,7 +27,7 @@ def birth_after_death_of_parents(fams, inds):
                 continue
             ch_year_birth = datetime.datetime.strptime(str(child_ind['birt']), '%d %b %Y').year
             if (ma_year_death - ch_year_birth) < 0 or (fa_year_death - ch_year_birth) < 0:
-                return f"ERROR: INDIVIDUAL: {child_ind['birt'].line}: US09: Child birth after parent death!"
+                return f"ERROR: INDIVIDUAL: LINE: {child_ind['birt'].line}: US09: Child birth after parent death!"
 
 
 def marriage_after_14(fams, inds):
@@ -48,7 +48,7 @@ def marriage_after_14(fams, inds):
         marr_date = datetime.datetime.strptime(str(fam['marr']), '%d %b %Y').year
 
         if (marr_date - fa_year_birth) < 14 or (marr_date - ma_year_birth) < 14:
-            return f"ERROR: FAMILY: {fam['marr'].line}: US10: Parents less than 14 years old!"
+            return f"ERROR: FAMILY: LINE: {fam['marr'].line}: US10: Parents less than 14 years old!"
 
 
 if __name__ == '__main__':

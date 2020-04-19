@@ -24,7 +24,7 @@ def unique_families_by_spouse(inds, fams):
             if fam['marr'].value in [rmar.value for rmar in recordmarr]:
                 line2 = [rmar.line for rmar in recordmarr if rmar.value == fam['marr'].value][0]
                 record.append(
-                    f"ERROR: INDIVIDUAL: US23: line{fam['marr'].line} and line {line2}: these two families have same spouses and marry date")
+                    f"ERROR: INDIVIDUAL: US24: line{fam['marr'].line} and line {line2}: these two families have same spouses and marry date")
         else:
             recordfam.append([fam['husb'].value, fam['wife'].value])
             recordmarr.append(fam['marr'])
@@ -32,6 +32,6 @@ def unique_families_by_spouse(inds, fams):
 
 
 if __name__ == '__main__':
-    inds, fams = get_inds_fams('../res/US24.ged')
+    inds, fams = get_inds_fams('../res/test_all_user_stories.ged')
     print(unique_name_and_birth(inds,fams))
     print(unique_families_by_spouse(inds, fams))

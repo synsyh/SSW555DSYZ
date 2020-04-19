@@ -6,8 +6,10 @@ from geddata import get_inds_fams, get_ind_by_id
 def less_than_150_years_old(inds):
     results = ''
     for ind in inds:
+        if 'age' not in ind.__dict__.keys():
+            continue
         if ind['age'].value >= 150:
-            results += f"ERROR: INDIVIDUAL: US07: line{ind['age'].line}: {ind['id'].value}: age {ind['age'].value} should less than 150."
+            results += f"ERROR: INDIVIDUAL: US07: LINE: {ind['age'].line}: {ind['id'].value}: age {ind['age'].value} should less than 150."
     return results
 
 
@@ -19,6 +21,8 @@ def birth_before_marriage_of_parents(inds, fams):
         chils = fam['chil']
         for chil_id in chils:
             chil = get_ind_by_id(chil_id, inds)
+            if 'birt' not in chil.__dict__.keys():
+                continue
             birth_date = chil['birt'].value
             birth_date = datetime.datetime.strptime(birth_date, '%d %b %Y')
             if birth_date < marr_date:
@@ -32,6 +36,7 @@ def birth_before_marriage_of_parents(inds, fams):
 
 
 if __name__ == '__main__':
-    inds, fams = get_inds_fams('../res/US08.ged')
+    inds, fams = get_inds_fams('../res/test_all_user_stories.ged')
+    print(less_than_150_years_old(inds))
     print(birth_before_marriage_of_parents(inds, fams))
     print()
